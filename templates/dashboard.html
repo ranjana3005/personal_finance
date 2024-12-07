@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <a href="/logout" class="btn logout">Logout</a>
+        <h2>Your Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.category }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Add Transaction</h2>
+        <form action="/add_transaction" method="POST">
+            <select name="type" required>
+                <option value="" disabled selected>Type</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
+            <input type="text" name="category" placeholder="Category" required>
+            <input type="number" name="amount" placeholder="Amount" required>
+            <input type="date" name="date" required>
+            <button type="submit" class="btn">Add</button>
+        </form>
+    </div>
+</body>
+</html>
